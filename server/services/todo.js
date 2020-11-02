@@ -31,21 +31,21 @@ class TodoService {
         return result.rows[0];
     }
     async toggleTodo(id) {
-        const complete = await this._pool.query(`SELETE completed_at FROM todos WHERE id = $1`, [id]);
-        if (!complete) {
+        const complete = await this._pool.query(`SELECT completed_at FROM todos WHERE id = $1`, [id]);
+        if (complete.rows[0].completed_at == null ) {
             const result = await this._pool.query(`UPDATE todos SET completed_at = NOW() WHERE id = $1`, [id]);
-            if(result.rows[0] == null) {
+            if (result.rows[0] == null) {
                 return null;
             }
             return result.rows[0];
         } else {
             const result = await this._pool.query(`UPDATE todos SET completed_at = NULL WHERE id = $1`, [id]);
-            if(result.rows[0] == null) {
+            if (result.rows[0] == null) {
                 return null;
             }
             return result.rows[0];
         }
     }
 }
-
+        
 module.exports = TodoService;

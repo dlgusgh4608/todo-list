@@ -19,9 +19,10 @@ module.exports = (router, service) => {
             res.json(e);
         }
     });
-    router.put('/api/v1/todos', async (req, res) => {
+    router.put('/api/v1/todos', async (req, res) => { //:content :id 이건 프론트랑 연결하면 그때 함
         try {
             const content = req.body.content;
+            // const content = req.params.content
             const id = req.body.id;
             if (content == null) {
                 res.status(400).json({ error: 'invalid', reason: 'content' });
