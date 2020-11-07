@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ReactDom from 'react-dom';
+import { createTodo, deleteTodo, getTodos, toggleTodo } from '../../api';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-import Spinner from './Spinner';
-import { getTodos, createTodo, deleteTodo, toggleTodo } from '../../api';
 
 const TodosWrapper = styled.div`
   margin: 0 auto;
@@ -51,6 +49,7 @@ const Todo = () => {
       if (!text) {
         return alert('입력을 해주세요.');
       }
+      setText('');
       setData({
         ...data,
         createLoading: true,
@@ -61,23 +60,21 @@ const Todo = () => {
         createLoading: false,
       });
       await fetchTodos();
-      setText('');
     },
     [data, fetchTodos, text],
   );
 
   const onDelete = async (id) => {
-    ReactDom.hydrate(<Spinner />, document.getElementById(`deleteBtn${id}`));
     await deleteTodo(id);
     await fetchTodos();
   };
 
   const onCheck = async (id) => {
-    ReactDom.hydrate(<Spinner />, document.getElementById(`checkToggle${id}`));
     await toggleTodo(id);
-    ReactDom.unmountComponentAtNode(document.getElementById(`checkToggle${id}`));
     await fetchTodos();
   };
+
+  // const onUpdate = async (id, content) => {};
 
   return (
     <form onSubmit={onSubmitTodo}>

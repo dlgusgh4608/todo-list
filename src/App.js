@@ -3,9 +3,10 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Todo from './components/todo/Todo';
 
 const GlobalStyle = createGlobalStyle`
-  body{
+  body {
     padding: 0;
     margin: 0;
+    font-family: 'Noto Sans CJK KR', Noto Sans KR, sans-serif;
   }
 `;
 const Container = styled.div`
@@ -23,6 +24,6 @@ const App = () => {
         <Todo />
       </Container>
     </>
-  )
-}
-export default App
+  );
+};
+export default App;

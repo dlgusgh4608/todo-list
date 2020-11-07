@@ -15,7 +15,7 @@ const InputTodo = styled.input`
   border-right-width: 0;
   margin: 0;
   padding: 0 10px;
-  box-sizing: border - box;
+  box-sizing: border-box;
   outline: none;
   font-size: 1.2em;
   ::placeholder {
@@ -26,7 +26,7 @@ const InputTodo = styled.input`
 const CreateBtn = styled.button`
   width: 20%;
   height: 50px;
-  box-sizing: border - box;
+  box-sizing: border-box;
   background-color: #339af0;
   color: white;
   border: 0;

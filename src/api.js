@@ -17,3 +17,7 @@ export const deleteTodo = async (id) => {
 export const toggleTodo = async (id) => {
   return await axios.put(`${API_ENDPOINT}/v1/toggleTodo/${id}`);
 };
+
+export const updateTodo = async (id, content) => {
+  return await axios.put(`${API_ENDPOINT}/v1/todos/${id}/${content}`);
+};

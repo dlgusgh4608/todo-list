@@ -1,43 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Spinner = () => (
-  <StyledSpinner viewBox="0 0 50 50">
-    <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="4" />
-  </StyledSpinner>
-);
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-const StyledSpinner = styled.svg`
-  animation: rotate 2s linear infinite;
-  margin: -25px 0 0 -25px;
-  width: auto;
-  height: auto;
-
-  & .path {
-    stroke: #000000;
-    stroke-linecap: round;
-    animation: dash 1.5s ease-in-out infinite;
+const Loader = styled.div`
+  &,
+  &:after {
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
   }
-
-  @keyframes rotate {
+  & {
+    /* margin: 60px auto; */
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-left: 2px solid #000000;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+  }
+  @-webkit-keyframes load8 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
     100% {
+      -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
-  @keyframes dash {
+  @keyframes load8 {
     0% {
-      stroke-dasharray: 1, 150;
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -35;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
     }
     100% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -124;
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
     }
   }
 `;
+
+const Spinner = () => (
+  <Wrapper>
+    <Loader />
+  </Wrapper>
+);
 
 export default Spinner;
