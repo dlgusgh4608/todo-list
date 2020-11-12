@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from './Spinner';
 import styled from 'styled-components';
 
 const TodosHeader = styled.div`
@@ -6,6 +7,7 @@ const TodosHeader = styled.div`
   width: 100%;
   height: 50px;
   padding: 0;
+  background-color: initial;
 `;
 
 const InputTodo = styled.input`
@@ -22,12 +24,20 @@ const InputTodo = styled.input`
     color: #ced4da;
   }
 `;
-
-const CreateBtn = styled.button`
+const CreateBtnWrapper = styled.div`
   width: 20%;
   height: 50px;
   box-sizing: border-box;
   background-color: #339af0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CreateBtn = styled.button`
+  width: 100%;
+  height: 100%;
+  background-color: inherit;
   color: white;
   border: 0;
   margin: 0;
@@ -47,7 +57,7 @@ const TodoForm = ({ loading, text, onChangeText }) => {
     <>
       <TodosHeader>
         <InputTodo type="text" placeholder="할 일을 적어주세요" value={text} onChange={onChangeText} />
-        {loading ? <div>loading...</div> : <CreateBtn type="submit">추가</CreateBtn>}
+        <CreateBtnWrapper>{loading ? <Spinner /> : <CreateBtn type="submit">추가</CreateBtn>}</CreateBtnWrapper>
       </TodosHeader>
     </>
   );

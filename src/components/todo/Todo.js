@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { createTodo, deleteTodo, getTodos, toggleTodo } from '../../api';
+import { createTodo, deleteTodo, getTodos, toggleTodo, updateTodo } from '../../api';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
@@ -74,13 +74,19 @@ const Todo = () => {
     await fetchTodos();
   };
 
-  // const onUpdate = async (id, content) => {};
+  const onUpdate = async (id, content) => {
+    if (!content) {
+      return alert('수정할 내용을 입력해주세요!');
+    }
+    await updateTodo(id, content);
+    await fetchTodos();
+  };
 
   return (
     <form onSubmit={onSubmitTodo}>
       <TodosWrapper>
         <TodoForm loading={data.createLoading} text={text} onChangeText={onChangeText} />
-        <TodoList loading={data.fetchLoading} data={data.todos} onDelete={onDelete} onCheck={onCheck} />
+        <TodoList loading={data.fetchLoading} data={data.todos} onDelete={onDelete} onCheck={onCheck} onUpdate={onUpdate} />
       </TodosWrapper>
     </form>
   );
